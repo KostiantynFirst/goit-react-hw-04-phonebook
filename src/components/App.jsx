@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { AddContactForm } from "./AddContactForm/AddContactForm";
 import { ContactList } from "./Contacts/Contacts";
 import useLocalStorage from "hooks/useLocalStorage";
@@ -34,13 +36,17 @@ export const App = () => {
       );
   
       if (isNameExist) {
-        alert('Contact with such name already exists!');
+        toast.error('Contact with such name already exists!', {
+          autoClose: 3000
+        });
         resetForm();
         return;
       }
   
       if (isNumberExist) {
-        alert('Contact with such number already exists!');
+        toast.error('Contact with such number already exists!', {
+          autoClose: 3000
+        });
         resetForm();
         return;
       }
@@ -94,6 +100,8 @@ export const App = () => {
     filteredContacts={filteredContacts}
     handleDeleteContact={handleDeleteContact} 
   />
+
+<ToastContainer/>
 
 </PhonebookContacts>
     
