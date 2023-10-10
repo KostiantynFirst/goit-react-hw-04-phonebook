@@ -1,25 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { nanoid } from "nanoid";
 import { AddContactForm } from "./AddContactForm/AddContactForm";
 import { ContactList } from "./Contacts/Contacts";
+import useLocalStorage from "hooks/useLocalStorage";
 import { PhonebookContainer, PhonebookHeadings, PhonebookContacts, PhonebookContactsHeading } from "../components/Phonebook/Phonebook.styled";
 import { Filter } from "./Filter/Filter";
 
 export const App = () => {
 
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useLocalStorage('contacts', []);
   const [filter, setFilter] = useState('');
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  useEffect(() => {
-    const storedContacts = JSON.parse(localStorage.getItem('contacts')) || [];
-    setContacts(storedContacts);
-  }, []);
+  // useEffect(() => {
+  //   const storedContacts = JSON.parse(localStorage.getItem('contacts')) || [];
+  //   setContacts(storedContacts);
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts])
+  // useEffect(() => {
+  //   localStorage.setItem('contacts', JSON.stringify(contacts));
+  // }, [contacts])
 
    const handleSubmit = e => {
       e.preventDefault();
